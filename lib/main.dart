@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         ),
         home: LoginScreen());
   }
-}
+} 
 
 _initializeFirebase() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);

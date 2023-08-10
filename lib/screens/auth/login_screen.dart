@@ -47,6 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
               width: mq.width * .5,
               duration: Duration(seconds: 1),
               child: Image.asset('images/cute.png')),
+              SizedBox(),
           Positioned(
             bottom: mq.height * .15,
             left: mq.width * .1,
@@ -60,6 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
               onPressed: () {
                 _handleGoogleBtnClick();
               },
+              
               icon: Image.asset(
                 'images/google.png',
                 height: mq.height * .04,
