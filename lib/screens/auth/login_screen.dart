@@ -1,4 +1,9 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
 import '../../main.dart';
 import '../home_screen.dart';
 
@@ -11,11 +16,10 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _isAnimate = false;
-
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 300), () {
+    Future.delayed(Duration(microseconds: 500), () {
       setState(() {
         _isAnimate = true;
       });
@@ -23,21 +27,37 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   _handleGoogleBtnClick() {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (_) => HomeScreen()));
+    signInWithGoogle().then((user) {
+      log('/nUser: ${user.user}');
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (_) => HomeScreen()));
+    });
   }
 
-   
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
   @override
   Widget build(BuildContext context) {
-    mq = MediaQuery.of(context).size;
     return Scaffold(
-      //app bar
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(
-          'Login We Chat',
-        ),
+        title: Text("wwewwww"),
       ),
       body: Stack(
         children: [
@@ -47,7 +67,6 @@ class _LoginScreenState extends State<LoginScreen> {
               width: mq.width * .5,
               duration: Duration(seconds: 1),
               child: Image.asset('images/cute.png')),
-              SizedBox(),
           Positioned(
             bottom: mq.height * .15,
             left: mq.width * .1,
@@ -61,7 +80,6 @@ class _LoginScreenState extends State<LoginScreen> {
               onPressed: () {
                 _handleGoogleBtnClick();
               },
-              
               icon: Image.asset(
                 'images/google.png',
                 height: mq.height * .04,
