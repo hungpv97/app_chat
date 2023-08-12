@@ -1,5 +1,10 @@
+import 'package:app_chat/widgets/chat_user_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
+import '../api/APIs.dart';
+import '../main.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,10 +34,21 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 10),
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () async {
+
+            await APIs.auth.signOut();
+            await GoogleSignIn().signOut();
+          },
           child: Icon(Icons.add_comment_rounded),
         ),
       ),
+    body: ListView.builder(
+      itemCount: 16,
+      padding: EdgeInsets.only(top: mq.height* .01),
+      physics: BouncingScrollPhysics(),
+      itemBuilder: (context, index){
+      return ChatUserCard();
+    }),
     );
   }
 }
