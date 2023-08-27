@@ -34,13 +34,21 @@ class _LoginScreenState extends State<LoginScreen> {
     //showing progress bar
     Dialogs.showProgressBar(context);
     _signInWithGoogle().then(
-      (user) {
+      (user) async {
         //hiding progress bar
         Navigator.pop(context);
         if (user != null) {
           log('/nUser: ${user.user}');
-          Navigator.pushReplacement(
+          if ((await APIs.userExists())) {
+            Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (_) => HomeScreen()));
+          }else{
+          await  APIs.createUser().then((value) {
+              Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (_) => HomeScreen()));
+          });
+          }
+          
         }
       },
     );
