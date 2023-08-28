@@ -24,7 +24,7 @@ class APIs {
   }
 
 //getting current user info
-  static getSelfInfo() async {
+  static Future<void> getSelfInfo() async {
     await firestore.collection("users").doc(user.uid).get().then((user) async {
       if (user.exists) {
         me = ChatUser.fromJson(user.data()!);
@@ -87,5 +87,13 @@ class APIs {
     await firestore.collection("users").doc(user.uid).update({
       'image': me.image,
     });
+  }
+  /**********Chat Screen Related APIs **********/
+
+  //for getting all messages of a specific conversation from firestore database
+   static Stream<QuerySnapshot<Map<String, dynamic>>> getAllMessages() {
+    return firestore
+        .collection('message')
+        .snapshots();
   }
 }
