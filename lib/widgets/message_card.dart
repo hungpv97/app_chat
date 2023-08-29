@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:app_chat/api/APIs.dart';
+import 'package:app_chat/helper/my_date_util.dart';
 import 'package:app_chat/models/message.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +24,11 @@ class _MessageCardState extends State<MessageCard> {
 
   //sender or another user message
   Widget _blueMessage() {
+    //update last read message if sender and receiver are different
+    if (widget.message.read.isEmpty) {
+      APIs.updateMessageReadStatus(widget.message);
+      log('message read update');
+    }
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -49,7 +57,8 @@ class _MessageCardState extends State<MessageCard> {
         Padding(
           padding: EdgeInsets.only(right: mq.width * .04),
           child: Text(
-            widget.message.sent,
+            MyDateUtil.getFormattedTime(
+                  context: context, time: widget.message.sent),
             style: TextStyle(fontSize: 13, color: Colors.black54),
           ),
         ),
@@ -65,20 +74,25 @@ class _MessageCardState extends State<MessageCard> {
         //message time
         Row(
           children: [
-
             //for adding some space
-            SizedBox(width: mq.width*.04,),
-            //double tick blue icon for message read
-            Icon(
-              Icons.done_all_rounded,
-              color: Colors.blue,
-              size: 20,
+            SizedBox(
+              width: mq.width * .04,
             ),
+            //double tick blue icon for message read
+            if (widget.message.read.isNotEmpty)
+              Icon(
+                Icons.done_all_rounded,
+                color: Colors.blue,
+                size: 20,
+              ),
             //for adding some space
-            SizedBox(width: 2,),
-            //read time
+            SizedBox(
+              width: 2,
+            ),
+            //sent time
             Text(
-              '${widget.message.read}12:00 AM',
+              MyDateUtil.getFormattedTime(
+                  context: context, time: widget.message.sent),
               style: TextStyle(fontSize: 13, color: Colors.black54),
             ),
           ],

@@ -13,11 +13,10 @@ class Message {
   late final String fromld;
   late final String read;
   late final String sent;
-  
-  
-  Message.fromJson(Map<String, dynamic> json){
+
+  Message.fromJson(Map<String, dynamic> json) {
     told = json['told'].toString();
-    type = json['type'].toString()==Type.image.name?Type.image:Type.text;
+    type = json['type'].toString() == Type.image.name ? Type.image : Type.text;
     msg = json['msg'].toString();
     fromld = json['fromld'].toString();
     read = json['read'].toString();
@@ -34,6 +33,6 @@ class Message {
     _data['sent'] = sent;
     return _data;
   }
-  
 }
-enum Type{text, image}
+
+enum Type { text, image }
