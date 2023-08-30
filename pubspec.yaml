@@ -32,6 +32,7 @@ dependencies:
   cached_network_image: ^3.2.3
   image_picker: ^1.0.2
   firebase_storage: ^11.2.6
+  emoji_picker_flutter: ^1.6.1
 
 
 
