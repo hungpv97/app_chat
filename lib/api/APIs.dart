@@ -72,7 +72,7 @@ class APIs {
   //update profile picture of user
   static Future<void> updateProfilePicture(File file) async {
     //getting image file extension
-    final ext = file.path.split('pattern').last;
+    final ext = file.path.split('.').last;
     log('extension: $ext');
 
     final ref = storage.ref().child('profile_pictures/${user.uid}.$ext');
@@ -84,8 +84,26 @@ class APIs {
     });
     //updating image in firestore database
     me.image = await ref.getDownloadURL();
-    await firestore.collection("users").doc(user.uid).update({
-      'image': me.image,
+    await firestore
+        .collection("users")
+        .doc(user.uid)
+        .update({'image': me.image});
+  }
+
+  //for getting specific user info
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getUserInfo(
+      ChatUser chatUser) {
+    return firestore
+        .collection('users')
+        .where('id', isEqualTo: chatUser.id)
+        .snapshots();
+  }
+
+  //update online or last active status of user
+  static Future<void> updateActiveStatus(bool isOnline) async {
+    firestore.collection('users').doc(user.uid).update({
+      'is_online': isOnline,
+      'last_active': DateTime.now().millisecondsSinceEpoch.toString()
     });
   }
 
@@ -100,17 +118,19 @@ class APIs {
       ChatUser user) {
     return firestore
         .collection('chats/${getConversationID(user.id)}/messages/')
+        .orderBy('sent', descending: true)
         .snapshots();
   }
 
   //for sending message
-  static Future<void> sendMessage(ChatUser chatUser, String msg) async {
+  static Future<void> sendMessage(
+      ChatUser chatUser, String msg, Type type) async {
     //message sending time (also used as id)
     final time = DateTime.now().millisecondsSinceEpoch.toString();
     //message to send
     final Message message = Message(
         told: chatUser.id,
-        type: Type.text,
+        type: type,
         msg: msg,
         fromld: user.uid,
         read: '',
@@ -133,8 +153,26 @@ class APIs {
       ChatUser user) {
     return firestore
         .collection('chats/${getConversationID(user.id)}/messages/')
-        .orderBy('sent',descending: true)
+        .orderBy('sent', descending: true)
         .limit(1)
         .snapshots();
+  }
+
+  //send chat time
+  static Future<void> sendChatImage(ChatUser chatUser, File file) async {
+    //getting image file extension
+    final ext = file.path.split('.').last;
+    //storage file ref with path
+    final ref = storage.ref().child(
+        'images/${getConversationID(chatUser.id)}/${DateTime.now().millisecondsSinceEpoch}.$ext');
+    //uploading image
+    await ref
+        .putFile(file, SettableMetadata(contentType: 'image/$ext'))
+        .then((p0) {
+      log('data Transferred: ${p0.bytesTransferred / 1000}kb');
+    });
+    //updating image in firestore database
+    final imageUrl = await ref.getDownloadURL();
+    await sendMessage(chatUser, imageUrl, Type.image);
   }
 }
