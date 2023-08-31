@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:app_chat/helper/my_date_util.dart';
 import 'package:app_chat/models/chat_user.dart';
 import 'package:app_chat/models/message.dart';
+import 'package:app_chat/screens/view_profile_screen.dart';
 import 'package:app_chat/widgets/message_card.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
@@ -134,7 +135,14 @@ class _ChatScreenState extends State<ChatScreen> {
 
   Widget _appBar() {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (_) => ViewProfileScreen(
+                      user: widget.user,
+                    )));
+      },
       child: StreamBuilder(
         stream: APIs.getUserInfo(widget.user),
         builder: (context, snapshot) {
@@ -184,9 +192,11 @@ class _ChatScreenState extends State<ChatScreen> {
                         ? list[0].isOnline
                             ? 'Online'
                             : MyDateUtil.getLastActiveTime(
-                                context: context, lastActive: list[0].lastActive)
+                                context: context,
+                                lastActive: list[0].lastActive)
                         : MyDateUtil.getLastActiveTime(
-                            context: context, lastActive: widget.user.lastActive),
+                            context: context,
+                            lastActive: widget.user.lastActive),
                     style: TextStyle(
                       fontSize: 13,
                       color: Colors.black54,

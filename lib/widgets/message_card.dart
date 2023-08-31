@@ -1,10 +1,7 @@
-import 'dart:developer';
-
 import 'package:app_chat/api/APIs.dart';
 import 'package:app_chat/helper/my_date_util.dart';
 import 'package:app_chat/models/message.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../main.dart';

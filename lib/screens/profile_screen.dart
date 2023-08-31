@@ -5,6 +5,7 @@ import 'package:app_chat/helper/dialogs.dart';
 import 'package:app_chat/models/chat_user.dart';
 import 'package:app_chat/screens/auth/login_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -42,6 +43,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             onPressed: () async {
               //showing progress dialog
               Dialogs.showProgressBar(context);
+await APIs.updateActiveStatus(false);
+
               //sign out from app
               await APIs.auth.signOut().then((value) async {
                 await GoogleSignIn().signOut();
@@ -49,6 +52,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Navigator.pop(context);
                 //moving to home screen
                 Navigator.pop(context);
+                APIs.auth=FirebaseAuth.instance;
                 // replacing home screen with login screen
                 Navigator.pushReplacement(
                     context, MaterialPageRoute(builder: (_) => LoginScreen()));
