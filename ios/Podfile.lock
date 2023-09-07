@@ -655,6 +655,9 @@ PODS:
   - Firebase/Firestore (10.12.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 10.12.0)
+  - Firebase/Messaging (10.12.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (~> 10.12.0)
   - Firebase/Storage (10.12.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 10.12.0)
@@ -664,6 +667,10 @@ PODS:
     - Flutter
   - firebase_core (2.15.1):
     - Firebase/CoreOnly (= 10.12.0)
+    - Flutter
+  - firebase_messaging (14.6.7):
+    - Firebase/Messaging (= 10.12.0)
+    - firebase_core
     - Flutter
   - firebase_storage (11.2.6):
     - Firebase/Storage (= 10.12.0)
@@ -698,6 +705,20 @@ PODS:
     - "gRPC-C++ (~> 1.50.1)"
     - leveldb-library (~> 1.22)
     - nanopb (< 2.30910.0, >= 2.30908.0)
+  - FirebaseInstallations (10.13.0):
+    - FirebaseCore (~> 10.0)
+    - GoogleUtilities/Environment (~> 7.8)
+    - GoogleUtilities/UserDefaults (~> 7.8)
+    - PromisesObjC (~> 2.1)
+  - FirebaseMessaging (10.12.0):
+    - FirebaseCore (~> 10.0)
+    - FirebaseInstallations (~> 10.0)
+    - GoogleDataTransport (~> 9.2)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/Environment (~> 7.8)
+    - GoogleUtilities/Reachability (~> 7.8)
+    - GoogleUtilities/UserDefaults (~> 7.8)
+    - nanopb (< 2.30910.0, >= 2.30908.0)
   - FirebaseStorage (10.12.0):
     - FirebaseAppCheckInterop (~> 10.0)
     - FirebaseAuthInterop (~> 10.0)
@@ -711,6 +732,10 @@ PODS:
   - google_sign_in_ios (0.0.1):
     - Flutter
     - GoogleSignIn (~> 6.2)
+  - GoogleDataTransport (9.2.5):
+    - GoogleUtilities/Environment (~> 7.7)
+    - nanopb (< 2.30910.0, >= 2.30908.0)
+    - PromisesObjC (< 3.0, >= 1.2)
   - GoogleSignIn (6.2.4):
     - AppAuth (~> 1.5)
     - GTMAppAuth (~> 1.3)
@@ -729,6 +754,8 @@ PODS:
     - GoogleUtilities/Reachability
   - "GoogleUtilities/NSData+zlib (7.11.5)"
   - GoogleUtilities/Reachability (7.11.5):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (7.11.5):
     - GoogleUtilities/Logger
   - "gRPC-C++ (1.50.1)":
     - "gRPC-C++/Implementation (= 1.50.1)"
@@ -819,6 +846,7 @@ DEPENDENCIES:
   - emoji_picker_flutter (from `.symlinks/plugins/emoji_picker_flutter/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
+  - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
   - Flutter (from `Flutter`)
   - google_sign_in_ios (from `.symlinks/plugins/google_sign_in_ios/ios`)
@@ -840,8 +868,11 @@ SPEC REPOS:
     - FirebaseCoreExtension
     - FirebaseCoreInternal
     - FirebaseFirestore
+    - FirebaseInstallations
+    - FirebaseMessaging
     - FirebaseStorage
     - FMDB
+    - GoogleDataTransport
     - GoogleSignIn
     - GoogleUtilities
     - "gRPC-C++"
@@ -861,6 +892,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_auth/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
+  firebase_messaging:
+    :path: ".symlinks/plugins/firebase_messaging/ios"
   firebase_storage:
     :path: ".symlinks/plugins/firebase_storage/ios"
   Flutter:
@@ -885,6 +918,7 @@ SPEC CHECKSUMS:
   Firebase: 07150e75d142fb9399f6777fa56a187b17f833a0
   firebase_auth: 3f7820b22557dd4a1b024f4d86947d1a0ff8a10f
   firebase_core: 4a3246a02f828a01c74a2c26427037786d90f17f
+  firebase_messaging: 0b4f7997f491343b90d9300af54fe55c72135833
   firebase_storage: 90a6038e00d3903c7f665dcfc57a9a98c7c8366b
   FirebaseAppCheckInterop: 5e12dc623d443dedffcde9c6f3ed41510125d8ef
   FirebaseAuth: a66c1e14ec58f41d154a4b41ce1a23ea00ad4805
@@ -893,10 +927,13 @@ SPEC CHECKSUMS:
   FirebaseCoreExtension: ce60f9db46d83944cf444664d6d587474128eeca
   FirebaseCoreInternal: b342e37cd4f5b4454ec34308f073420e7920858e
   FirebaseFirestore: f94c9541515fa4a49af52269bbc50349009424b4
+  FirebaseInstallations: b28af1b9f997f1a799efe818c94695a3728c352f
+  FirebaseMessaging: bb2c4f6422a753038fe137d90ae7c1af57251316
   FirebaseStorage: 1d7ca8c8953fc61ccacaa7c612696b5402968a0d
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   google_sign_in_ios: 1256ff9d941db546373826966720b0c24804bcdd
+  GoogleDataTransport: 54dee9d48d14580407f8f5fbf2f496e92437a2f2
   GoogleSignIn: 5651ce3a61e56ca864160e79b484cd9ed3f49b7a
   GoogleUtilities: 13e2c67ede716b8741c7989e26893d151b2b2084
   "gRPC-C++": 0968bace703459fd3e5dcb0b2bed4c573dbff046
