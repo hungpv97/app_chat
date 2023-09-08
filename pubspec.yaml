@@ -36,7 +36,11 @@ dependencies:
   firebase_messaging: ^14.6.7
   http: ^1.1.0
   flutter_notification_channel: ^2.0.0
+  gallery_saver: ^2.3.2
+  
 
+dependency_overrides:
+  http: ^0.13.1
 
 
 dev_dependencies:

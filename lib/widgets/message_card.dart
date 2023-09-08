@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:app_chat/api/APIs.dart';
 import 'package:app_chat/helper/my_date_util.dart';
 import 'package:app_chat/models/message.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import '../helper/dialogs.dart';
 import '../main.dart';
 
@@ -202,7 +205,7 @@ class _MessageCardState extends State<MessageCard> {
                         await Clipboard.setData(
                                 ClipboardData(text: widget.message.msg))
                             .then((value) {
-                              Navigator.of(context, rootNavigator: true).pop();
+                          Navigator.of(context, rootNavigator: true).pop();
                           // Navigator.pop(context);
                           Dialogs.showSnackbar(context, 'Text Copied!');
                         });
@@ -215,7 +218,22 @@ class _MessageCardState extends State<MessageCard> {
                         size: 26,
                       ),
                       name: 'Save Image',
-                      onTap: () {}),
+                      onTap: () async {
+                        try {
+                          log('Image url: ${widget.message.msg}');
+                          await GallerySaver.saveImage(widget.message.msg,
+                                  albumName: 'app chat')
+                              .then((success) {
+                            //for hiding bottom sheet
+                            Navigator.pop(context);
+                            if (success != null && success) {
+                              Dialogs.showSnackbar(context, 'Image Saved!');
+                            }
+                          });
+                        } catch (e) {
+                          log('er: $e');
+                        }
+                      }),
               //separator or divider
               if (isMe)
                 Divider(
@@ -232,7 +250,11 @@ class _MessageCardState extends State<MessageCard> {
                       size: 26,
                     ),
                     name: 'Edit Message',
-                    onTap: () {}),
+                    onTap: () {
+                      //for hiding bottom sheet
+                      Navigator.pop(context);
+                      _showMessageUpdateDialog();
+                    }),
 
               //delete option
               if (isMe)
@@ -244,9 +266,9 @@ class _MessageCardState extends State<MessageCard> {
                     ),
                     name: 'Delete Message',
                     onTap: () async {
-                     await APIs.deleteMessage(widget.message).then((value) {
-                      Navigator.pop(context);
-                     });
+                      await APIs.deleteMessage(widget.message).then((value) {
+                        Navigator.pop(context);
+                      });
                     }),
               Divider(
                 color: Colors.black54,
@@ -275,6 +297,65 @@ class _MessageCardState extends State<MessageCard> {
             ],
           );
         });
+  }
+
+  //dialog for update message content
+  void _showMessageUpdateDialog() {
+    String updateMsg = widget.message.msg;
+    showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+          contentPadding: EdgeInsets.only(left: 24,right: 24,top: 20,bottom: 10),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
+              //title
+              title: Row(
+                children: [
+                  Icon(
+                    Icons.message,
+                    color: Colors.blue,
+                    size: 28,
+                  ),
+                  Text('Update Message')
+                ],
+              ),
+              //content
+              content: TextFormField(
+                initialValue: updateMsg,
+
+                maxLines: null,
+                onChanged: (value) => updateMsg=value,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15))),
+              ),
+              //action
+              actions: [
+                //cancel button
+                MaterialButton(
+                  onPressed: () {
+                    //hide alert dialog
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    'Cancel',
+                    style: TextStyle(color: Colors.blue, fontSize: 16),
+                  )
+                ),
+                //update action
+                 MaterialButton(
+                  onPressed: () {
+                    //hide alert dialog
+                    Navigator.pop(context);
+                    APIs.updateMessage(widget.message, updateMsg);
+                  },
+                  child: Text(
+                    'Update',
+                    style: TextStyle(color: Colors.blue, fontSize: 16),
+                  )
+                ),
+              ],
+            ));
   }
 }
 

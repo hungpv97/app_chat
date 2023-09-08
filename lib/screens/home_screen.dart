@@ -124,12 +124,13 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.only(bottom: 10),
             child: FloatingActionButton(
               onPressed: () async {
-                await APIs.auth.signOut();
-                await GoogleSignIn().signOut();
+                
               },
               child: Icon(Icons.add_comment_rounded),
             ),
           ),
+
+          //body
           body: StreamBuilder(
             stream: APIs.getAllUsers(),
             builder: (context, snapshot) {
