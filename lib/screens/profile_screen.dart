@@ -43,7 +43,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             onPressed: () async {
               //showing progress dialog
               Dialogs.showProgressBar(context);
-await APIs.updateActiveStatus(false);
+              await APIs.updateActiveStatus(false);
 
               //sign out from app
               await APIs.auth.signOut().then((value) async {
@@ -52,7 +52,7 @@ await APIs.updateActiveStatus(false);
                 Navigator.pop(context);
                 //moving to home screen
                 Navigator.pop(context);
-                APIs.auth=FirebaseAuth.instance;
+                APIs.auth = FirebaseAuth.instance;
                 // replacing home screen with login screen
                 Navigator.pushReplacement(
                     context, MaterialPageRoute(builder: (_) => LoginScreen()));
@@ -247,8 +247,8 @@ await APIs.updateActiveStatus(false);
                       onPressed: () async {
                         final ImagePicker picker = ImagePicker();
                         //pick an image
-                        final XFile? image =
-                            await picker.pickImage(source: ImageSource.gallery,imageQuality: 80);
+                        final XFile? image = await picker.pickImage(
+                            source: ImageSource.gallery, imageQuality: 80);
                         if (image != null) {
                           log('image Path: ${image.path}-- MimeType: ${image.mimeType}');
                           setState(() {
@@ -270,14 +270,14 @@ await APIs.updateActiveStatus(false);
                       onPressed: () async {
                         final ImagePicker picker = ImagePicker();
                         //pick an image
-                        final XFile? image =
-                            await picker.pickImage(source: ImageSource.camera,imageQuality: 80);
+                        final XFile? image = await picker.pickImage(
+                            source: ImageSource.camera, imageQuality: 80);
                         if (image != null) {
                           log('image Path: ${image.path}');
                           setState(() {
                             _image = image.path;
                           });
-                           APIs.updateProfilePicture(File(_image!));
+                          APIs.updateProfilePicture(File(_image!));
 
                           // for hiding bottom sheet
                           Navigator.pop(context);
@@ -290,4 +290,6 @@ await APIs.updateActiveStatus(false);
           );
         });
   }
+
+
 }
