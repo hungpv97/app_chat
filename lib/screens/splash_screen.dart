@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:app_chat/screens/auth/login_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../api/APIs.dart';
@@ -22,8 +23,9 @@ class _SplashScreenState extends State<SplashScreen> {
       // full-screen
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-          systemNavigationBarColor: Colors.white,
-          statusBarColor: Colors.white));
+          // systemNavigationBarColor: Colors.white,
+          // statusBarColor: Colors.white,
+          ));
 
       if (APIs.auth.currentUser != null) {
         log('/nUser: ${APIs.auth.currentUser}');
@@ -46,6 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
         title: Text(
           'Login we Chat',
         ),
+        
       ),
       body: Stack(
         children: [
@@ -62,7 +65,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,
-                  color: Colors.black,
+                  // color: Colors.black,
                 ),
               )),
         ],

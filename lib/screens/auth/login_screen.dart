@@ -28,9 +28,9 @@ class _LoginScreenState extends State<LoginScreen> {
       });
     });
   }
+
 //handles google login button click
   _handleGoogleBtnClick() {
-
     //showing progress bar
     Dialogs.showProgressBar(context);
     _signInWithGoogle().then(
@@ -41,14 +41,13 @@ class _LoginScreenState extends State<LoginScreen> {
           log('/nUser: ${user.user}');
           if ((await APIs.userExists())) {
             Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (_) => HomeScreen()));
-          }else{
-          await  APIs.createUser().then((value) {
+                context, MaterialPageRoute(builder: (_) => HomeScreen()));
+          } else {
+            await APIs.createUser().then((value) {
               Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (_) => HomeScreen()));
-          });
+                  context, MaterialPageRoute(builder: (_) => HomeScreen()));
+            });
           }
-          
         }
       },
     );
@@ -101,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
             height: mq.height * .07,
             child: ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green[300],
+                  // backgroundColor: Colors.green[300],
                   shape: StadiumBorder(),
                   elevation: 1),
               onPressed: () {
@@ -113,7 +112,10 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               label: RichText(
                 text: TextSpan(
-                  style: TextStyle(color: Colors.black, fontSize: 16),
+                  style: TextStyle(
+                    // color: Colors.black,
+                    fontSize: 16,
+                  ),
                   children: [
                     TextSpan(text: 'LogIn with '),
                     TextSpan(
