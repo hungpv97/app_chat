@@ -53,7 +53,7 @@ class _ChatScreenState extends State<ChatScreen> {
               automaticallyImplyLeading: false,
               flexibleSpace: _appBar(),
             ),
-            backgroundColor: Color.fromARGB(255, 238, 245, 250),
+            // backgroundColor: Color.fromARGB(255, 238, 245, 250),
             body: Column(
               children: [
                 Expanded(
@@ -119,7 +119,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     child: EmojiPicker(
                       textEditingController: _textController,
                       config: Config(
-                        bgColor: Color.fromARGB(255, 238, 245, 250),
+                        // bgColor: Color.fromARGB(255, 238, 245, 250),
                         columns: 8,
                         emojiSizeMax: 32 * (Platform.isIOS ? 1.30 : 1.0),
                       ),
@@ -157,7 +157,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   onPressed: () => Navigator.pop(context),
                   icon: Icon(
                     Icons.arrow_back,
-                    color: Colors.black54,
+                    // color: Colors.black54,
                   )),
               //user profile picture
               ClipRRect(
@@ -183,8 +183,8 @@ class _ChatScreenState extends State<ChatScreen> {
                     list.isNotEmpty ? list[0].name : widget.user.name,
                     style: TextStyle(
                       fontSize: 16,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w500,
+                      // color: Colors.black87,
+                      // fontWeight: FontWeight.w500,
                     ),
                   ),
                   Text(
@@ -199,8 +199,8 @@ class _ChatScreenState extends State<ChatScreen> {
                             lastActive: widget.user.lastActive),
                     style: TextStyle(
                       fontSize: 13,
-                      color: Colors.black54,
-                      fontWeight: FontWeight.w500,
+                      // color: Colors.black54,
+                      // fontWeight: FontWeight.w500,
                     ),
                   ),
                 ],
@@ -231,7 +231,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     },
                     icon: Icon(
                       Icons.emoji_emotions,
-                      color: Colors.blueAccent,
+                      // color: Colors.blueAccent,
                       size: 25,
                     )),
                 Expanded(
@@ -244,7 +244,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     },
                     decoration: InputDecoration(
                       hintText: 'Type Something',
-                      hintStyle: TextStyle(color: Colors.blueAccent),
+                      // hintStyle: TextStyle(color: Colors.blueAccent),
                       border: InputBorder.none,
                     ),
                   ),
@@ -266,7 +266,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     },
                     icon: Icon(
                       Icons.image,
-                      color: Colors.blueAccent,
+                      // color: Colors.blueAccent,
                       size: 26,
                     )),
                 // take image from camera button
@@ -286,7 +286,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     },
                     icon: Icon(
                       Icons.camera_alt_rounded,
-                      color: Colors.blueAccent,
+                      // color: Colors.blueAccent,
                       size: 26,
                     )),
                 SizedBox(
@@ -301,17 +301,24 @@ class _ChatScreenState extends State<ChatScreen> {
         MaterialButton(
           onPressed: () {
             if (_textController.text.isNotEmpty) {
-              APIs.sendMessage(widget.user, _textController.text, Type.text);
+              if (_list.isEmpty) {
+                //on first message(add user to my_user collection of chat user)
+                APIs.sendFirstMessage(
+                    widget.user, _textController.text, Type.text);
+              } else {
+                //simply send message
+                APIs.sendMessage(widget.user, _textController.text, Type.text);
+              }
               _textController.text = '';
             }
           },
           minWidth: 0,
           padding: EdgeInsets.only(top: 10, bottom: 10, right: 5, left: 10),
           shape: CircleBorder(),
-          color: Colors.green,
+          // color: Colors.green,
           child: Icon(
             Icons.send,
-            color: Colors.white,
+            // color: Colors.white,
             size: 28,
           ),
         )

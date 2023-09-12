@@ -47,20 +47,23 @@ class _MessageCardState extends State<MessageCard> {
             margin: EdgeInsets.symmetric(
                 horizontal: mq.width * .04, vertical: mq.height * .01),
             decoration: BoxDecoration(
-                color: Color.fromARGB(255, 229, 242, 251),
+                // color: Color.fromARGB(255, 229, 242, 251),
                 border: Border.all(color: Colors.lightBlue),
                 //making borders curved
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30),
-                  bottomRight: Radius.circular(30),
-                )),
+              topLeft: Radius.circular(30),
+              topRight: Radius.circular(30),
+              bottomRight: Radius.circular(30),
+            )),
             child: widget.message.type == Type.text
                 ?
                 //show text
                 Text(
                     widget.message.msg,
-                    style: TextStyle(fontSize: 15, color: Colors.black87),
+                    style: TextStyle(
+                      fontSize: 15,
+                      // color: Colors.black87,
+                    ),
                   )
                 :
                 //show image
@@ -87,7 +90,10 @@ class _MessageCardState extends State<MessageCard> {
           child: Text(
             MyDateUtil.getFormattedTime(
                 context: context, time: widget.message.sent),
-            style: TextStyle(fontSize: 13, color: Colors.black54),
+            style: TextStyle(
+              fontSize: 13,
+              // color: Colors.black54,
+            ),
           ),
         ),
       ],
@@ -110,7 +116,7 @@ class _MessageCardState extends State<MessageCard> {
             if (widget.message.read.isNotEmpty)
               Icon(
                 Icons.done_all_rounded,
-                color: Colors.blue,
+                // color: Colors.blue,
                 size: 20,
               ),
             //for adding some space
@@ -121,7 +127,10 @@ class _MessageCardState extends State<MessageCard> {
             Text(
               MyDateUtil.getFormattedTime(
                   context: context, time: widget.message.sent),
-              style: TextStyle(fontSize: 13, color: Colors.black54),
+              style: TextStyle(
+                fontSize: 13,
+                // color: Colors.black54,
+              ),
             ),
           ],
         ),
@@ -135,20 +144,23 @@ class _MessageCardState extends State<MessageCard> {
             margin: EdgeInsets.symmetric(
                 horizontal: mq.width * .04, vertical: mq.height * .01),
             decoration: BoxDecoration(
-                color: Color.fromARGB(255, 201, 235, 217),
-                border: Border.all(color: Colors.lightGreen),
+                // color: Color.fromARGB(255, 201, 235, 217),
+                border: Border.all(color: Colors.grey),
                 //making borders curved
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30),
-                  bottomLeft: Radius.circular(30),
-                )),
+              topLeft: Radius.circular(30),
+              topRight: Radius.circular(30),
+              bottomLeft: Radius.circular(30),
+            )),
             child: widget.message.type == Type.text
                 ?
                 //show text
                 Text(
                     widget.message.msg,
-                    style: TextStyle(fontSize: 15, color: Colors.black87),
+                    style: TextStyle(
+                      fontSize: 15,
+                      // color: Colors.black87,
+                    ),
                   )
                 :
                 //show image
@@ -189,7 +201,9 @@ class _MessageCardState extends State<MessageCard> {
                 margin: EdgeInsets.symmetric(
                     vertical: mq.height * .015, horizontal: mq.width * .4),
                 decoration: BoxDecoration(
-                    color: Colors.grey, borderRadius: BorderRadius.circular(8)),
+                  // color: Colors.grey,
+                  borderRadius: BorderRadius.circular(8),
+                ),
               ),
               widget.message.type == Type.text
                   ?
@@ -197,7 +211,7 @@ class _MessageCardState extends State<MessageCard> {
                   _OptionItem(
                       icon: Icon(
                         Icons.copy_all_rounded,
-                        color: Colors.blue,
+                        // color: Colors.blue,
                         size: 26,
                       ),
                       name: 'Copy Text',
@@ -214,7 +228,7 @@ class _MessageCardState extends State<MessageCard> {
                   _OptionItem(
                       icon: Icon(
                         Icons.download_rounded,
-                        color: Colors.blue,
+                        // color: Colors.blue,
                         size: 26,
                       ),
                       name: 'Save Image',
@@ -237,7 +251,7 @@ class _MessageCardState extends State<MessageCard> {
               //separator or divider
               if (isMe)
                 Divider(
-                  color: Colors.black54,
+                  // color: Colors.black54,
                   endIndent: mq.width * .04,
                   indent: mq.width * .04,
                 ),
@@ -246,7 +260,7 @@ class _MessageCardState extends State<MessageCard> {
                 _OptionItem(
                     icon: Icon(
                       Icons.edit,
-                      color: Colors.blue,
+                      // color: Colors.blue,
                       size: 26,
                     ),
                     name: 'Edit Message',
@@ -261,7 +275,7 @@ class _MessageCardState extends State<MessageCard> {
                 _OptionItem(
                     icon: Icon(
                       Icons.delete_forever,
-                      color: Colors.red,
+                      // color: Colors.red,
                       size: 26,
                     ),
                     name: 'Delete Message',
@@ -271,7 +285,7 @@ class _MessageCardState extends State<MessageCard> {
                       });
                     }),
               Divider(
-                color: Colors.black54,
+                // color: Colors.black54,
                 endIndent: mq.width * .04,
                 indent: mq.width * .04,
               ),
@@ -279,7 +293,7 @@ class _MessageCardState extends State<MessageCard> {
               _OptionItem(
                   icon: Icon(
                     Icons.remove_red_eye,
-                    color: Colors.blue,
+                    // color: Colors.blue,
                   ),
                   name:
                       'Sent At: ${MyDateUtil.getMessageTime(context: context, time: widget.message.sent)}',
@@ -288,7 +302,7 @@ class _MessageCardState extends State<MessageCard> {
               _OptionItem(
                   icon: Icon(
                     Icons.remove_red_eye,
-                    color: Colors.green,
+                    // color: Colors.green,
                   ),
                   name: widget.message.read.isEmpty
                       ? 'Read At: Not seen yet'
@@ -305,7 +319,8 @@ class _MessageCardState extends State<MessageCard> {
     showDialog(
         context: context,
         builder: (_) => AlertDialog(
-          contentPadding: EdgeInsets.only(left: 24,right: 24,top: 20,bottom: 10),
+              contentPadding:
+                  EdgeInsets.only(left: 24, right: 24, top: 20, bottom: 10),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20)),
               //title
@@ -313,7 +328,7 @@ class _MessageCardState extends State<MessageCard> {
                 children: [
                   Icon(
                     Icons.message,
-                    color: Colors.blue,
+                    // color: Colors.blue,
                     size: 28,
                   ),
                   Text('Update Message')
@@ -322,9 +337,8 @@ class _MessageCardState extends State<MessageCard> {
               //content
               content: TextFormField(
                 initialValue: updateMsg,
-
                 maxLines: null,
-                onChanged: (value) => updateMsg=value,
+                onChanged: (value) => updateMsg = value,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15))),
@@ -333,27 +347,31 @@ class _MessageCardState extends State<MessageCard> {
               actions: [
                 //cancel button
                 MaterialButton(
-                  onPressed: () {
-                    //hide alert dialog
-                    Navigator.pop(context);
-                  },
-                  child: Text(
-                    'Cancel',
-                    style: TextStyle(color: Colors.blue, fontSize: 16),
-                  )
-                ),
+                    onPressed: () {
+                      //hide alert dialog
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      'Cancel',
+                      style: TextStyle(
+                        // color: Colors.blue,
+                        fontSize: 16,
+                      ),
+                    )),
                 //update action
-                 MaterialButton(
-                  onPressed: () {
-                    //hide alert dialog
-                    Navigator.pop(context);
-                    APIs.updateMessage(widget.message, updateMsg);
-                  },
-                  child: Text(
-                    'Update',
-                    style: TextStyle(color: Colors.blue, fontSize: 16),
-                  )
-                ),
+                MaterialButton(
+                    onPressed: () {
+                      //hide alert dialog
+                      Navigator.pop(context);
+                      APIs.updateMessage(widget.message, updateMsg);
+                    },
+                    child: Text(
+                      'Update',
+                      style: TextStyle(
+                        // color: Colors.blue,
+                        fontSize: 16,
+                      ),
+                    )),
               ],
             ));
   }
@@ -382,7 +400,10 @@ class _OptionItem extends StatelessWidget {
                 child: Text(
               '   $name',
               style: TextStyle(
-                  fontSize: 15, color: Colors.black54, letterSpacing: 0.5),
+                fontSize: 15,
+                // color: Colors.black54,
+                letterSpacing: 0.5,
+              ),
             ))
           ],
         ),

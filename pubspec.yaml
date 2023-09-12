@@ -38,6 +38,9 @@ dependencies:
   flutter_notification_channel: ^2.0.0
   gallery_saver: ^2.3.2
   
+  provider: ^6.0.5
+  shared_preferences: ^2.2.1
+  hexcolor: ^3.0.1
 
 dependency_overrides:
   http: ^0.13.1

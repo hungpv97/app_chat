@@ -24,22 +24,28 @@ class _ViewProfileScreenState extends State<ViewProfileScreen> {
           title: Text(widget.user.name),
         ),
         floatingActionButton: //user about
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Joined On: ',
-                      style: TextStyle(
-                          color: Colors.black87,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 15),
-                    ),
-                    Text(
-                      MyDateUtil.getLastMessageTime(context: context, time: widget.user.createdAt, showYear: true),
-                      style: TextStyle(color: Colors.black54, fontSize: 15),
-                    ),
-                  ],
-                ),
+            Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Joined On: ',
+              style: TextStyle(
+                  // color: Colors.black87,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 15),
+            ),
+            Text(
+              MyDateUtil.getLastMessageTime(
+                  context: context,
+                  time: widget.user.createdAt,
+                  showYear: true),
+              style: TextStyle(
+                // color: Colors.black54,
+                fontSize: 15,
+              ),
+            ),
+          ],
+        ),
 
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: mq.width * .05),
@@ -71,7 +77,10 @@ class _ViewProfileScreenState extends State<ViewProfileScreen> {
 
                 Text(
                   widget.user.email,
-                  style: TextStyle(color: Colors.black87, fontSize: 16),
+                  style: TextStyle(
+                    // color: Colors.black87,
+                    fontSize: 16,
+                  ),
                 ),
                 SizedBox(
                   height: mq.height * .02,
@@ -83,13 +92,16 @@ class _ViewProfileScreenState extends State<ViewProfileScreen> {
                     Text(
                       'About:',
                       style: TextStyle(
-                          color: Colors.black87,
+                          // color: Colors.black87,
                           fontWeight: FontWeight.w500,
                           fontSize: 16),
                     ),
                     Text(
                       widget.user.about,
-                      style: TextStyle(color: Colors.black54, fontSize: 16),
+                      style: TextStyle(
+                        // color: Colors.black54,
+                        fontSize: 16,
+                      ),
                     ),
                   ],
                 ),

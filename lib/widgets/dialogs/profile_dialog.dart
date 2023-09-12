@@ -14,7 +14,7 @@ class ProfileDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       contentPadding: EdgeInsets.zero,
-      backgroundColor: Colors.white.withOpacity(.9),
+      // backgroundColor: Colors.white.withOpacity(.9),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       content: SizedBox(
         width: mq.width * .6,
@@ -63,7 +63,7 @@ class ProfileDialog extends StatelessWidget {
                   shape: CircleBorder(),
                   child: Icon(
                     Icons.info_outline,
-                    color: Colors.blue,
+                    // color: Colors.blue,
                     size: 30,
                   )))
         ]),
